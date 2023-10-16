@@ -22,10 +22,16 @@ def download_youtube_video(video_id, save_path='.', video_title=''):
         print(f"An error occurred: {e}")
 # Perform a search for the video
 def video(name):
-    videos = Search(name, limit=1).videos()
-    video_id = videos[0]['id']
-    video_title = videos[0]['title']
-    return video_id, video_title
+    try:
+        videos = Search(name, limit=1).videos()
+        video_id = videos[0]['id']
+        video_title = videos[0]['title']
+        return video_id, video_title
+    except Exception as e:
+        videos = Search(name, limit=3).videos()
+        video_id = videos[0]['id']
+        video_title = videos[0]['title']
+        return video_id, video_title
 
 
 
